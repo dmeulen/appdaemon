@@ -2,7 +2,7 @@ FROM python:3.6
 
 VOLUME /conf
 VOLUME /certs
-EXPOSE 5050
+EXPOSE 80
 
 # Environment vars we can configure against
 # But these are optional, so we won't define them now
@@ -18,6 +18,8 @@ COPY . .
 
 # Install
 RUN pip3 install .
+RUN apt install nginx
+COPY nginx.conf /etc/nginx
 
 # Start script
 RUN chmod +x /usr/src/app/dockerStart.sh
